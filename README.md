@@ -1,6 +1,8 @@
 # Kyma-Miła
+Welcome to Kyma-Mila tool
+This tool can helps you with deploying kyma on gcp cluster, getting certs, ip or console password.
 
-Installation guid
+## Installation Guid
 
 1. Clone repository
 ```
