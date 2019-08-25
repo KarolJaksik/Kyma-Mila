@@ -158,8 +158,6 @@ do
     fi
 done
 
-exit
-
 if [ ${main_tasks[0]} == "rusz" ]; 
 then
     CLUSTER_NAME=${main_tasks[1]}
