@@ -11,6 +11,8 @@ export PROVICER=gcp
 export VERSION=1.4.1
 
 get_version=0
+get_arg=0
+task_scheduled=0
 declare -a main_tasks
 main_tasks[0]="nothing"
 main_tasks[1]="comasz"
@@ -126,16 +128,20 @@ do
     then
         VERSION=$option
         get_version=0
-    elif [  "${main_tasks[0]}" != "nothing" -a "${#main_tasks[@]}" == 1 ];
+    elif [  "${main_tasks[0]}" != "nothing" ] && [ $get_arg == 1 ];
     then
         main_tasks[1]=$option
+        get_arg=0
+        task_scheduled=1
     elif [ "$option" == "dej" ];
     then 
-        if [ "${main_tasks[0]}" != "nothing" -a ${#main_tasks} -gt 1 ]; then echo Please use only one [OPTION] key word - problem with $option; exit; fi
+        if [ "${main_tasks[0]}" != "nothing" ] && [ $task_scheduled == 1 ]; then echo Please use only one [OPTION] key word - problem with $option; exit; fi
+        get_arg=1
         main_tasks[0]=$option 
     elif [ "$option" == "rusz" ];
     then
-        if [ "${main_tasks[0]}" != "nothing" -a ${#main_tasks} -gt 1 ]; then echo Please use only one [OPTION] key word - problem with $option; exit; fi
+        if [ "${main_tasks[0]}" != "nothing" ] && [ $task_scheduled == 1 ]; then echo Please use only one [OPTION] key word - problem with $option; exit; fi
+        get_arg=1
         main_tasks[0]=$option
     
     #switches
@@ -151,6 +157,8 @@ do
         exit
     fi
 done
+
+exit
 
 if [ ${main_tasks[0]} == "rusz" ]; 
 then
