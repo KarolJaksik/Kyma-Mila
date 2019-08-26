@@ -210,7 +210,7 @@ fi
 if [ ${main_tasks[0]} == "nothing" ]; 
 then 
     echo ===================================================================================================================
-    echo Welcome to Kyma-Mila tool 
+    echo Welcome to Kyma-Mila tool v 1.0.1
     echo This tool can help you with deploying kyma on gcp cluster, getting certs, ip or console password
     echo Command structure: kiła [OPTION] [ARGUMENT] [SWITCH]
     echo 

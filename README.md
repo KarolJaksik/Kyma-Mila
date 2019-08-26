@@ -32,4 +32,18 @@ This tool can help you with deploying kyma on gcp cluster, getting certs, ip or 
     kiła
     ```
 
+## Uninstallation Guide
+
+1. Remove kiła from your mac
+
+    ```bash
+    rm -rf /usr/local/bin/kiła
+    ```
+
+## Updating Guide
+
+1. Uninstall kiła from your mac first
+
+2. Install new version of kiła
+
 ## Happy kiła-ing! :)
