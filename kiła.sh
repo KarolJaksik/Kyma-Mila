@@ -32,10 +32,12 @@ function build_image(){
 }
 
 function tiller_certs(){
+    echo Tiller certs...
     sh -c "$(curl -s https://raw.githubusercontent.com/kyma-project/kyma/master/installation/scripts/tiller-tls.sh)"
 }
 
 function console_certs(){
+    echo Consol certs...
     tmpfile=$(mktemp /tmp/temp-cert.XXXXXX) \
     && kubectl get configmap net-global-overrides -n kyma-installer -o jsonpath='{.data.global\.ingress\.tlsCrt}' | base64 --decode > $tmpfile \
     && sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain $tmpfile \
@@ -184,9 +186,15 @@ then
     then
         get_console_ip
         get_pass
+        console_certs
+        tiller_certs
     elif [ ${main_tasks[1]} == "strone" ];
     then
         get_console_ip
+    elif [ ${main_tasks[1]} == "certy" ]
+    then
+        console_certs
+        tiller_certs
     elif [ ${main_tasks[1]} == "pasy" ];
     then
         get_pass
@@ -212,11 +220,11 @@ then
     echo For example kiła rusz my-cluster -v 1.4.1
     echo -nm or --na-minikube - will deploy kyma on minikube. NOT SUPPORTED YET!
     echo ===================================================================================================================
-    echo
     echo Getting informationes:
-    echo kiła dej or kiła dej comasz- will print kyma\'s ip, password, open console in web browser window and copy password to cache
+    echo kiła dej or kiła dej comasz- will print kyma\'s ip, password, open console in web browser window, install certs and copy password to cache
     echo kiła dej strone - will print kyma\'s ip and open it in web browser window
     echo kiła dej pasy - will print kyma\'s password
     echo kiła dej ip - will print kyma\'s ip
+    echo kiła dej certy - will apply all kyma\'s certs
     echo ===================================================================================================================
 fi
