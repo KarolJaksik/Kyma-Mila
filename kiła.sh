@@ -184,10 +184,10 @@ if [ ${main_tasks[0]} == "dej" ];
 then
     if [ ${main_tasks[1]} == "comasz" ]; 
     then
-        get_console_ip
-        get_pass
         console_certs
         tiller_certs
+        get_console_ip
+        get_pass
     elif [ ${main_tasks[1]} == "strone" ];
     then
         get_console_ip
