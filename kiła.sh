@@ -32,12 +32,12 @@ function build_image(){
 }
 
 function tiller_certs(){
-    echo Tiller certs...
+    echo Getting Tiller certificates...
     sh -c "$(curl -s https://raw.githubusercontent.com/kyma-project/kyma/master/installation/scripts/tiller-tls.sh)"
 }
 
 function console_certs(){
-    echo Consol certs...
+    echo Getting Kyma console certificates...
     tmpfile=$(mktemp /tmp/temp-cert.XXXXXX) \
     && kubectl get configmap net-global-overrides -n kyma-installer -o jsonpath='{.data.global\.ingress\.tlsCrt}' | base64 --decode > $tmpfile \
     && sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain $tmpfile \
